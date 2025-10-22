@@ -4,16 +4,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { loginSchema } from "@/Schema/Login/SchemaLogin";
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("O e-mail deve ser válido")
-    .required("Campo obrigatório"),
-  password: yup.string().required("Campo obrigatório"),
-});
-
-type FormData = yup.InferType<typeof schema>;
+type FormData = yup.InferType<typeof loginSchema>;
 
 export const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -23,7 +16,7 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
   });
 
   const onSubmit = async (data: FormData) => {
@@ -43,22 +36,20 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md rounded-lg bg-white p-8 shadow-md"
+        className="w-full max-w-md rounded-lg bg-card p-8 shadow-md"
       >
-        <h1 className="mb-6 text-center text-2xl font-bold">Login</h1>
-
+        <h1 className="mb-6 text-center text-2xl font-bold text-foreground">
+          Login
+        </h1>
         <div className="mb-4">
-          <Input
-            type="email"
-            placeholder="E-mail"
-            {...register("email")}
-            // error={!!errors.email}
-          />
+          <Input type="email" placeholder="E-mail" {...register("email")} />
           {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+            <p className="mt-1 text-sm text-destructive">
+              {errors.email.message}
+            </p>
           )}
         </div>
 
@@ -67,17 +58,16 @@ export const Login = () => {
             type="password"
             placeholder="Senha"
             {...register("password")}
-            // error={!!errors.password}
           />
           {errors.password && (
-            <p className="mt-1 text-sm text-red-500">
+            <p className="mt-1 text-sm text-destructive">
               {errors.password.message}
             </p>
           )}
         </div>
 
         {errorMessage && (
-          <p className="mb-4 text-center text-sm text-red-600">
+          <p className="mb-4 text-center text-sm text-destructive">
             {errorMessage}
           </p>
         )}
@@ -92,7 +82,7 @@ export const Login = () => {
         </Button>
 
         <div className="mt-4 text-center">
-          <a href="#" className="text-sm text-blue-500 hover:underline">
+          <a href="#" className="text-sm text-primary hover:underline">
             Esqueceu a senha?
           </a>
         </div>
