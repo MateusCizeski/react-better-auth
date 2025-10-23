@@ -4,12 +4,10 @@ import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import { ThemeProvider } from "./components/theme-provider";
 import { Header } from "./components/ui/header";
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
         <Header />
         <Routes>
@@ -20,7 +18,6 @@ function App() {
           <Route element={<Home />}></Route>
         </Routes>
       </Router>
-    </ThemeProvider>
   );
 }
 

@@ -5,12 +5,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        border: "var(--border)",
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-      ringWidth: {
-        DEFAULT: "1px",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: "hsl(var(--card))",
+        cardForeground: "hsl(var(--card-foreground))",
+        primary: "hsl(var(--primary))",
+        primaryForeground: "hsl(var(--primary-foreground))",
+        muted: "hsl(var(--muted))",
+        mutedForeground: "hsl(var(--muted-foreground))",
+        destructive: "hsl(var(--destructive))",
+        destructiveForeground: "hsl(var(--destructive-foreground))",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
       },
     },
   },
