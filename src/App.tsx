@@ -5,11 +5,13 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import { ThemeProvider } from "./components/theme-provider";
+import { Header } from "./components/ui/header";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
+        <Header />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
