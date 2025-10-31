@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "@/redux/store";
 
-const axiosDefault = axios.create({
+const api = axios.create({
   baseURL: "https://localhost:7117/",
   timeout: 100000,
   headers: {
@@ -9,7 +9,7 @@ const axiosDefault = axios.create({
   },
 });
 
-axiosDefault.interceptors.request.use(
+api.interceptors.request.use(
   async (reqConfig) => {
     try {
       const state = store.getState();
@@ -23,4 +23,4 @@ axiosDefault.interceptors.request.use(
   (err) => Promise.reject(err)
 );
 
-export default axiosDefault;
+export default api;

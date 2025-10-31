@@ -3,10 +3,16 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 type FormData = {
   email: string;
 };
+
+const forgotPasswordSchema = yup.object({
+  email: yup.string().email("E-mail inválido").required("E-mail é obrigatório"),
+});
 
 export const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +22,9 @@ export const ForgotPassword = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    resolver: yupResolver(forgotPasswordSchema),
+  });
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
