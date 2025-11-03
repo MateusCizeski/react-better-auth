@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiBase = axios.create({
-  baseURL: "https://localhost:7117/",
+  baseURL: "https://meuservidorubuntu.com.br/users",
   timeout: 100000,
   headers: {
     "Content-Type": "application/json",

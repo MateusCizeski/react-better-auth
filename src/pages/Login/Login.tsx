@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { loginSchema } from "@/Schema/Login/SchemaLogin";
 import { Link } from "react-router-dom";
+import user from "@/services/user";
 
 type FormData = yup.InferType<typeof loginSchema>;
 
@@ -22,6 +23,11 @@ export const Login = () => {
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
+
+    const response = await user.login(data.email, data.password);
+
+    console.log(response);
+
     setErrorMessage("");
     try {
       console.log("Login data:", data);

@@ -1,11 +1,10 @@
 import apiBase from "@/api/apiBase";
-import api from "@/api/api";
 
 class User {
   async login(email: string, password: string) {
     const response = await apiBase({
       method: "POST",
-      url: "api/v1/users",
+      url: "api/v1/users/login",
       data: JSON.stringify({ Email: email, Password: password }),
     });
 
