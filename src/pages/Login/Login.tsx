@@ -5,12 +5,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { loginSchema } from "@/Schema/Login/SchemaLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import user from "@/services/user";
+import { useDispatch } from "react-redux";
+import { login } from "@/redux/slice/user";
 
 type FormData = yup.InferType<typeof loginSchema>;
 
 export const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const {
@@ -22,21 +26,24 @@ export const Login = () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    setLoading(true);
+    if (data.email.trim() === "" || data.password.trim() === "") return;
 
-    const response = await user.login(data.email, data.password);
-
-    console.log(response);
-
-    setErrorMessage("");
     try {
-      console.log("Login data:", data);
+      setLoading(true);
+
+      const response = await user.login(data.email, data.password);
+
+      dispatch(login(response));
+
+      setErrorMessage("");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMessage(err.message);
       } else {
         setErrorMessage("Erro desconhecido");
       }
+
+      navigate("/");
     } finally {
       setLoading(false);
     }

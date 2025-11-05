@@ -27,10 +27,10 @@ export const ForgotPassword = () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    setLoading(true);
-    setErrorMessage("");
-    setSuccessMessage("");
     try {
+      setLoading(true);
+      setErrorMessage("");
+      setSuccessMessage("");
       console.log("Password reset for:", data.email);
       setSuccessMessage("Link de recuperação enviado para seu e-mail!");
     } catch (err: unknown) {
