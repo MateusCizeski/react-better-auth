@@ -11,7 +11,15 @@ class User {
     return response.data;
   }
 
-  async newUser() {}
+  async newUser(name: string, userName: string, email: string, password: string) {
+    const response = await apiBase({
+      method: "POST",
+      url: "/api/v1/users",
+      data: JSON.stringify({ Name: name, UserName: userName, Email: email, Password: password }),
+    });
+
+    return response.data;
+  }
 
   async updateUser() {}
 

@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import user from "@/services/user";
+import { useDispatch } from "react-redux";
+import { loginSignIn } from "@/redux/slice/user";
 
 type FormData = {
   name: string;
@@ -12,6 +15,7 @@ type FormData = {
 };
 
 export const Register = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const {
@@ -23,10 +27,15 @@ export const Register = () => {
   const password = watch("password");
 
   const onSubmit = async (data: FormData) => {
-    setLoading(true);
-    setErrorMessage("");
     try {
-      console.log("Register data:", data);
+      setLoading(true);
+
+      const response = await user.newUser(data.name, data.name, data.email, data.password);
+
+      console.log(response);
+
+      dispatch(loginSignIn(response));
+
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMessage(err.message);
