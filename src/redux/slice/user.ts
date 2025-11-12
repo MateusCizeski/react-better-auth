@@ -13,8 +13,7 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.isAuthenticated = true;
-      state.bearerToken = action.payload.Content.BearerToken;
-      state.name = action.payload.Content.Nome;
+      state.bearerToken = action.payload.content.token;
     },
     setEmail: (state, action) => {
       state.email = action.payload.Email;

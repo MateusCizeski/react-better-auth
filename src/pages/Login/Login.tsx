@@ -36,14 +36,14 @@ export const Login = () => {
       dispatch(login(response));
 
       setErrorMessage("");
+
+      navigate("/");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMessage(err.message);
       } else {
         setErrorMessage("Erro desconhecido");
       }
-
-      navigate("/");
     } finally {
       setLoading(false);
     }
