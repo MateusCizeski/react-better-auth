@@ -16,6 +16,7 @@ export const Home = () => {
 
   return (
     <div style={{height: "auto" }}>
+      <h1>Pagina home</h1>
     </div>
   );
 };

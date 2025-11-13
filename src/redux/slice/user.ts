@@ -25,8 +25,6 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       state.isAuthenticated = false;
-      state.name = "";
-      state.email = "";
       state.bearerToken = "";
     },
   },

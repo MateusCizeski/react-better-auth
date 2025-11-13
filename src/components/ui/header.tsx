@@ -9,14 +9,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { LogOut, Settings, User } from "lucide-react"
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/redux/store"
+import { logout } from "@/redux/slice/user"
 
 export function Header() {
   const user = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    console.log("Logging out...")
+    dispatch(logout());
   }
 
   return (
@@ -67,7 +69,7 @@ export function Header() {
                 onClick={handleLogout}
                 className="text-red-600 dark:text-red-400"
               >
-                <LogOut className="mr-2 h-4 w-4" /> Logout
+                <LogOut className="mr-2 h-4 w-4" onClick={handleLogout}/> Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
