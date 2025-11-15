@@ -7,21 +7,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { LogOut, Settings, User } from "lucide-react"
+import { LogOut, User } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/redux/store"
 import { logout } from "@/redux/slice/user"
+import { useState } from "react"
 
 export function Header() {
-  const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user)
+  const [profileModalOpen, setProfileModalOpen] = useState(false)
 
   const handleLogout = () => {
     dispatch(logout());
   }
 
   return (
+    <>
     <header className="flex justify-between items-center p-4 border-b border-border bg-background backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <Link
         to="/"
@@ -53,14 +56,8 @@ export function Header() {
 
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setProfileModalOpen(true)}>
                 <User className="mr-2 h-4 w-4" /> Profile
-              </DropdownMenuItem>
-
-              <DropdownMenuSeparator />
-
-              <DropdownMenuItem>
-                <Settings className="mr-2 h-4 w-4" /> Settings
               </DropdownMenuItem>
 
               <DropdownMenuSeparator />
@@ -76,5 +73,9 @@ export function Header() {
         )}
       </nav>
     </header>
+
+    <ProfileModal open={profileModalOpen} onOpenChange={setProfileModalOpen} />
+    </>
+    
   )
 }
