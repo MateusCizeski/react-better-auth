@@ -23,7 +23,7 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
 
   const [formData, setFormData] = useState({
     name: user.name || "",
-    email: user.email || "",
+    email: user.email || ""
   })
 
   const handleChange = (
@@ -44,7 +44,7 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
   const handleCancel = () => {
     setFormData({
       name: user.name || "",
-      email: user.email || "",
+      email: user.email || ""
     })
     onOpenChange(false)
   }
