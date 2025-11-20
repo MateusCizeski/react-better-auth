@@ -5,6 +5,8 @@ const initialState = {
   bearerToken: "",
   name: "",
   email: "",
+  userName: "",
+  refreshToken: ""
 };
 
 const userSlice = createSlice({
@@ -14,6 +16,10 @@ const userSlice = createSlice({
     login: (state, action) => {
       state.isAuthenticated = true;
       state.bearerToken = action.payload.content.token;
+      state.name = action.payload.content.name;
+      state.email = action.payload.content.email;
+      state.userName = action.payload.content.userName;
+      state.refreshToken = action.payload.content.refreshToken;
     },
     setEmail: (state, action) => {
       state.email = action.payload.Email;
@@ -26,6 +32,10 @@ const userSlice = createSlice({
     logout: (state) => {
       state.isAuthenticated = false;
       state.bearerToken = "";
+      state.name = "";
+      state.email = "";
+      state.userName = "";
+      state.refreshToken = "";
     },
   },
 });

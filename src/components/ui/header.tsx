@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/redux/store"
 import { logout } from "@/redux/slice/user"
 import { useState } from "react"
+import { ProfileModal } from "../profile-model"
 
 export function Header() {
   const dispatch = useDispatch();
