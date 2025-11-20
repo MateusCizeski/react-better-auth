@@ -16,6 +16,7 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           <Route path="/" element={<Home />} />
+          <Route path="*" element={<div>Página não encontrada (404)</div>}/>
         </Routes>
       </Router>
   );

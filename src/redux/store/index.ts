@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import user from "../slice/user";
+import tab from "../slice/tab";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const rootReducer = persistReducer(persistConfig, user);
 const store = configureStore({
   reducer: {
     user: rootReducer,
+    tabs: tab
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
