@@ -2,6 +2,7 @@ import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Dashboard from "../Dashboard";
 
 export const Home = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -16,7 +17,7 @@ export const Home = () => {
 
   return (
     <div style={{height: "auto" }}>
-      <h1>Pagina home</h1>
+      <Dashboard />
     </div>
   );
 };

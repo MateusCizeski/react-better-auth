@@ -5,6 +5,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import { Header } from "./components/ui/header";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/register" element={<Register />} />
-
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/" element={<Home />} />
           <Route path="*" element={<div>Página não encontrada (404)</div>}/>
         </Routes>

@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import user from "@/services/user";
 import { useDispatch } from "react-redux";
 import { login } from "@/redux/slice/user";
+import { setTabs, setTabsIndex } from "@/redux/slice/tab";
 
 type FormData = yup.InferType<typeof loginSchema>;
 
@@ -36,6 +37,12 @@ export const Login = () => {
       dispatch(login(response));
 
       setErrorMessage("");
+
+      dispatch(setTabs([
+        { Codigo: 0, Aba: 0 }
+      ]));
+
+      dispatch(setTabsIndex(0));
 
       navigate("/");
     } catch (err: unknown) {
