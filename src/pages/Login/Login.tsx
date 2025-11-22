@@ -1,21 +1,22 @@
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { loginSchema } from "@/Schema/Login/SchemaLogin";
 import { Link, useNavigate } from "react-router-dom";
-import user from "@/services/user";
-import { useDispatch } from "react-redux";
+import servUser from "@/services/user";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/redux/slice/user";
-import { setTabs, setTabsIndex } from "@/redux/slice/tab";
+import { RootState } from "@/redux/store";
 
 type FormData = yup.InferType<typeof loginSchema>;
 
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.user);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const {
@@ -26,25 +27,23 @@ export const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
+  useEffect(() => {
+  if (user && user.isAuthenticated) {
+    navigate("/");
+  }
+}, [user]);
+
   const onSubmit = async (data: FormData) => {
     if (data.email.trim() === "" || data.password.trim() === "") return;
 
     try {
       setLoading(true);
 
-      const response = await user.login(data.email, data.password);
+      const response = await servUser.login(data.email, data.password);
 
       dispatch(login(response));
 
       setErrorMessage("");
-
-      dispatch(setTabs([
-        { Codigo: 0, Aba: 0 }
-      ]));
-
-      dispatch(setTabsIndex(0));
-
-      navigate("/");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMessage(err.message);
@@ -53,6 +52,7 @@ export const Login = () => {
       }
     } finally {
       setLoading(false);
+      navigate("/");
     }
   };
 
