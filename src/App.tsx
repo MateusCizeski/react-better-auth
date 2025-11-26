@@ -4,22 +4,25 @@ import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import { Header } from "./components/ui/header";
 import Dashboard from "./pages/Dashboard";
+import { PrivateLayout } from "./layout/PrivateLayout";
 
 function App() {
   return (
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+
+        <Route element={<PrivateLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="*" element={<div>Página não encontrada (404)</div>}/>
-        </Routes>
-      </Router>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+
+        <Route path="*" element={<div>404 — Página não encontrada</div>} />
+      </Routes>
+    </Router>
   );
 }
 
