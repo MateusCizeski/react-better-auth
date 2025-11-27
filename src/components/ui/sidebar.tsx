@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 
 export function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const location = useLocation();
 
   const menu = [
