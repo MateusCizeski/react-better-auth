@@ -6,10 +6,12 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import { PrivateLayout } from "./layout/PrivateLayout";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <Router>
+      <Toaster richColors position="top-right" />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

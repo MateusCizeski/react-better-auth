@@ -37,6 +37,17 @@ const userSlice = createSlice({
       state.userName = "";
       state.refreshToken = "";
     },
+    updateUser: (state, action) => {
+      if (action.payload.name !== undefined) {
+        state.name = action.payload.name;
+      }
+      if (action.payload.userName !== undefined) {
+        state.userName = action.payload.userName;
+      }
+      if (action.payload.email !== undefined) {
+        state.email = action.payload.email;
+      }
+    }
   },
 });
 
