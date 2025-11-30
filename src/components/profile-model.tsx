@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { updateUser } from "@/redux/slice/user";
 
 interface ProfileModalProps {
   open: boolean;
@@ -40,14 +41,13 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
 
   const handleSave = async () => {
     if (!formData.name.trim()) {
-      toast.error("O nome não pode estar vazio.");
+      toast.error("Name cannot be empty.");
       return;
     }
 
     setLoading(true);
 
     try {
-      // chamada real para API
       const response = await fetch(
         "http://localhost:5001/users/api/v1/users/update-self",
         {
@@ -57,22 +57,21 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
             "X-Device-Id": "web-app",
           },
           body: JSON.stringify({
-            name: formData.name, // bate com UserUpdateSelfDto
+            name: formData.name,
           }),
         }
       );
 
       if (!response.ok) {
-        throw new Error("Erro ao atualizar perfil");
+        throw new Error("Error updating profile");
       }
 
-      // Atualiza Redux localmente
       dispatch(updateUser({ name: formData.name }));
 
-      toast.success("Perfil atualizado com sucesso!");
+      toast.success("Profile updated successfully!");
       onOpenChange(false);
     } catch (error) {
-      toast.error("Não foi possível atualizar o perfil.");
+      toast.error("Unable to update profile.");
       console.error(error);
     } finally {
       setLoading(false);
@@ -91,26 +90,22 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Editar Perfil</DialogTitle>
-          <DialogDescription>
-            Atualize suas informações abaixo.
-          </DialogDescription>
+          <DialogTitle>Edit Profile</DialogTitle>
+          <DialogDescription>Update your information below.</DialogDescription>
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
-          {/* FULL NAME */}
           <div className="grid gap-2">
-            <Label htmlFor="name">Nome Completo</Label>
+            <Label htmlFor="name">Full Name</Label>
             <Input
               id="name"
               name="name"
-              placeholder="Digite seu nome"
+              placeholder="Enter your full name"
               value={formData.name}
               onChange={handleChange}
             />
           </div>
 
-          {/* EMAIL */}
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -126,10 +121,10 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
 
         <DialogFooter>
           <Button variant="outline" onClick={handleCancel}>
-            Cancelar
+            Cancel
           </Button>
           <Button onClick={handleSave} disabled={loading}>
-            {loading ? "Salvando..." : "Salvar Alterações"}
+            {loading ? "Saving..." : "Save Changes"}
           </Button>
         </DialogFooter>
       </DialogContent>
