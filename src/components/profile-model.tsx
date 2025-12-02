@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { updateUser } from "@/redux/slice/user";
+import servUser from "@/services/user";
 
 interface ProfileModalProps {
   open: boolean;
@@ -45,22 +46,9 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
       return;
     }
 
-    setLoading(true);
-
     try {
-      const response = await fetch(
-        "http://localhost:5001/users/api/v1/users/update-self",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Device-Id": "web-app",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-          }),
-        }
-      );
+      setLoading(true);
+      const response = await servUser.updateUser(user.id);
 
       if (!response.ok) {
         throw new Error("Error updating profile");

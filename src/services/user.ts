@@ -21,7 +21,14 @@ class User {
     return response.data;
   }
 
-  async updateUser() {}
+  async updateUser(id: string) {
+    const response = await apiBase({
+      method: "PUT",
+      url: `/api/v1/users/${id}`,
+    });
+
+    return response.data;
+  }
 
   async refresh() {}
 
