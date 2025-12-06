@@ -32,9 +32,15 @@ class User {
     return response.data;
   }
 
-  async refresh() {}
+  async refresh() {
+    const response = await api({
+      method: "POST",
+      url: "/api/v1/users/refresh",
+      withCredentials: true
+    });
 
-  async logout() {}
+    return response.data;
+  }
 }
 
 export default new User();

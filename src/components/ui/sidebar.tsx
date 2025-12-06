@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Home, Grid, Settings } from "lucide-react";
+import { Home, Grid, Settings, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 
@@ -21,10 +21,10 @@ export function Sidebar() {
       )}
     >
       <button
-        className="p-2 w-full text-center border-b"
+        className="p-3 w-full border-b flex justify-center hover:bg-muted transition"
         onClick={() => setCollapsed(!collapsed)}
       >
-        {collapsed ? "➡" : "⬅"}
+        {collapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
       </button>
 
       <nav className="p-2 space-y-2">
