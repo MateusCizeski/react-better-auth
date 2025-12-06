@@ -28,10 +28,10 @@ export const Login = () => {
   });
 
   useEffect(() => {
-  if (user && user.isAuthenticated) {
-    navigate("/");
-  }
-}, [user]);
+    if (user && user.isAuthenticated) {
+      navigate("/");
+    }
+  }, [user]);
 
   const onSubmit = async (data: FormData) => {
     if (data.email.trim() === "" || data.password.trim() === "") return;

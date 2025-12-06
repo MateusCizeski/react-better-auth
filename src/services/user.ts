@@ -1,3 +1,4 @@
+import api from "@/api/api";
 import apiBase from "@/api/apiBase";
 
 class User {
@@ -21,10 +22,11 @@ class User {
     return response.data;
   }
 
-  async updateUser(id: string) {
-    const response = await apiBase({
+  async updateUser(id: string, name: string) {
+    const response = await api({
       method: "PUT",
       url: `/api/v1/users/${id}`,
+      data: JSON.stringify({ Name: name }),
     });
 
     return response.data;

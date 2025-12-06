@@ -16,7 +16,7 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.isAuthenticated = true;
-      state.id = action.payload.id;
+      state.id = action.payload.content.id;
       state.bearerToken = action.payload.content.token;
       state.name = action.payload.content.name;
       state.email = action.payload.content.email;

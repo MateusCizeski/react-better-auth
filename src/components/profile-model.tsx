@@ -48,9 +48,9 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
 
     try {
       setLoading(true);
-      const response = await servUser.updateUser(user.id);
+      const response = await servUser.updateUser(user.id, formData.name);
 
-      if (!response.ok) {
+      if (!response.success) {
         throw new Error("Error updating profile");
       }
 
