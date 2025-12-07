@@ -31,7 +31,7 @@ export const Login = () => {
     if (user && user.isAuthenticated) {
       navigate("/");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const onSubmit = async (data: FormData) => {
     if (data.email.trim() === "" || data.password.trim() === "") return;

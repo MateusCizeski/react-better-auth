@@ -32,10 +32,11 @@ class User {
     return response.data;
   }
 
-  async refresh() {
-    const response = await api({
+  async refresh(refreshToken: string) {
+    const response = await apiBase({
       method: "POST",
       url: "/api/v1/users/refresh",
+      data: JSON.stringify({ RefreshToken: refreshToken }),
       withCredentials: true
     });
 

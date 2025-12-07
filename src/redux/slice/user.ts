@@ -49,9 +49,12 @@ const userSlice = createSlice({
       if (action.payload.email !== undefined) {
         state.email = action.payload.email;
       }
+    },
+    setBearerToken: (state, action) => {
+      state.bearerToken = action.payload;
     }
   },
 });
 
-export const { logout, login, loginSignIn, updateUser } = userSlice.actions;
+export const { logout, login, loginSignIn, updateUser, setBearerToken } = userSlice.actions;
 export default userSlice.reducer;
